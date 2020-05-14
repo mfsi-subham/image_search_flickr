@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.coordinates',
+    'apps.favourite_photos'
 ]
 
 MIDDLEWARE = [
