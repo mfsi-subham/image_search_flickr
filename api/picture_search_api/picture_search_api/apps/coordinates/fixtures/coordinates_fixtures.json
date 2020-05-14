@@ -1,0 +1,22 @@
+[
+  {
+    "model": "coordinates.Coordinate",
+    "pk": 1,
+    "fields": {
+      "latitude": 19.0760,
+      "longitude": 72.8777,
+       "place_name": "Mumbai"
+    }
+  },
+
+  {
+    "model": "coordinates.Coordinate",
+    "pk": 2,
+    "fields": {
+      "latitude": 22.5726,
+      "longitude": 88.3639,
+       "place_name": "Kolkata"
+    }
+  }
+]
+
