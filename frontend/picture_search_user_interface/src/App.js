@@ -1,9 +1,14 @@
 import React from 'react';
+import Navbar from '../src/components/navbar'
 
 
-function App() {
+const  App = props => {
   return (
+
     <div>
+
+      <Navbar/>
+
     </div>
   );
 }
