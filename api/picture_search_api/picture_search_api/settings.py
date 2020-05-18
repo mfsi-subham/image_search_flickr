@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.coordinates',
     'apps.favourite_photos',
     'graphene_django',
+    'corsheaders',
 ]
 
 GRAPHENE = {
@@ -58,8 +59,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'picture_search_api.urls'
 
 TEMPLATES = [
