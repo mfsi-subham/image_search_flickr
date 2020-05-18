@@ -1,19 +1,20 @@
 import React from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom'
 import Navbar from '../src/components/navbar'
-import {Route, Switch, Redirect, BrowserRouter} from 'react-router-dom'
 import Favourites from '../src/components/favourites'
+import HomePageSearch from '../src/containers/homePageSearch'
 
 
 const  App = props => {
 
   let routes = (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/favourites" component={Favourites}/>
-        <Route path="/" component={Navbar}/>
-        <Redirect to="/" />
-      </Switch>
-    </BrowserRouter>
+    
+    <Switch>
+      <Route path="/favourites" component={Favourites}/>
+      <Route path="/" component={HomePageSearch}/>
+      <Redirect to="/" />
+    </Switch>
+    
   );
 
   return (
