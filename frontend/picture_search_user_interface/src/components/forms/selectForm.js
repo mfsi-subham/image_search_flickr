@@ -1,35 +1,40 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Form, Col} from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-import * as actions from '../../store/actions/index'
 import {connect} from 'react-redux'
+import * as actions from '../../store/actions/index'
 
 
-const SelectForm = props => {
+const selectForm = props => {
 
-    useEffect(() => {
-        props.onPlaceList()
-    }, [])
+    let optionItem = props.options.map((i, opt)=>{
+        return <option key={i.placeName}>{i.placeName}</option>
+    })
 
+    const getFlickrData = (event) => {
+        event.preventDefault()
+        props.fetchData()
+    }
+    
     return (
         <Form>
             <Form.Row>
                 <Col sm={2}>
                     <Form.Control size="sm" as="select" name="options">
-                        <option>Choose...</option>
-                        <option>...</option>
+                        {optionItem}
                     </Form.Control>
                 </Col>
-                <Button variant="outline-info" size="sm" >Submit</Button>{' '}
+                <Button variant="outline-info" size="sm" onClick={getFlickrData} >Submit</Button>{' '}
             </Form.Row>
         </Form>
     );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch =>{
     return{
-        onPlaceList: () => dispatch(actions.placeFetch())
-    }
-}
+        fetchData: () => dispatch(actions.fetchFlickrData())
+    };
+};
 
-export default connect(null, mapDispatchToProps)(SelectForm)
+
+export default connect(null, mapDispatchToProps)(selectForm);
