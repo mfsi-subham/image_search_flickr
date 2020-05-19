@@ -34,7 +34,6 @@ export const placeFetch = () => {
             }
         })
         .then(result => {
-            console.log(result.data.data.coordinates)
             dispatch(placeFetchSuccess(result.data.data.coordinates))
         })
         .catch(error => {
