@@ -34,11 +34,57 @@ export const placeFetch = () => {
             }
         })
         .then(result => {
+            
             dispatch(placeFetchSuccess(result.data.data.coordinates))
         })
         .catch(error => {
             console.log(error)
             dispatch(placeFetchFail(error))
+        })
+    }
+}
+
+//------Fetching Lat Long of a place--------//
+export const latLongFetchStart = () => {
+    return{
+        type: actionTypes.FETCH_LAT_LONG_DATA_START
+    };
+};
+
+
+export const latLongFetchSuccess = (coordinates) => {
+    
+    return{
+        type: actionTypes.FETCH_LAT_LONG_DATA_SUCCESS,
+        lat: coordinates['latitude'],
+        long: coordinates['longitude']
+    };
+};
+
+export const latLongFetchFail = (error) => {
+    return{
+        type: actionTypes.FETCH_LAT_LONG_DATA_FAIL,
+        error: error
+    };
+};
+
+export const fetchLatLongData = (option) => {
+    return dispatch => {
+        dispatch(latLongFetchStart())
+        axios({
+            url: 'http://localhost:8000/graphql/',
+            method: 'post',
+            data: {
+                query: `{coordinate(placeName: "${option}"){latitude longitude}}`
+            }
+        })
+        .then(result => {
+            dispatch(latLongFetchSuccess(result.data.data.coordinate))
+            
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(latLongFetchFail(error))
         })
     }
 }
