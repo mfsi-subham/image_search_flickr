@@ -22,7 +22,7 @@ const SelectForm = props => {
     const getFlickrData = (event) => {
 
         event.preventDefault()
-        props.fetchFlickrData(props.lat, props.long)     
+        props.fetchFlickrData(props.lat, props.long, 1)
     }
 
     const handleChange = (event) => {
@@ -45,14 +45,14 @@ const SelectForm = props => {
 
 const mapStateToProps = state =>{
     return{
-        lat: state.placeList.lat,
-        long: state.placeList.long
+        lat: state.photoList.lat,
+        long: state.photoList.long,
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
-        fetchFlickrData: (lat, long) => dispatch(actions.fetchFlickrData(lat, long)),
+        fetchFlickrData: (lat, long, page) => dispatch(actions.fetchFlickrData(lat, long, page)),
         fetchLatLongData: (option) => dispatch(actions.fetchLatLongData(option))
     };
 };
