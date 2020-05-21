@@ -9,7 +9,7 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import thunk from 'redux-thunk'
 import placeListReducer from './store/reducers/placeList'
-import fetchFlickrDataReducer from './store/reducers/fetchFlickData'
+import fetchFlickrDataReducer from './store/reducers/fetchFlickrData'
 
 
 const composeEnhancers = process.env.NODE_ENV ==='development'? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
