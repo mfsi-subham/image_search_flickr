@@ -1,2 +1,2 @@
-export {placeFetch} from './placeList'
+export {placeFetch,fetchLatLongData} from './placeList'
 export {fetchFlickrData} from './fetchFlickrData'
