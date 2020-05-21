@@ -4,6 +4,7 @@ import SelectForm from '../components/forms/selectForm'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index'
 import {connect} from 'react-redux'
+import SearchResult from '../containers/searchResult'
 
 const HomePageSearch = props => {
 
@@ -38,6 +39,7 @@ const HomePageSearch = props => {
         }
         
         <br></br>
+        {props.photoList ? <SearchResult></SearchResult>: null}
         
         </div>
     );
@@ -45,7 +47,8 @@ const HomePageSearch = props => {
 
 const mapStateToProps = state => {
     return{
-        options: state.placeList.placeList
+        options: state.placeList.placeList,
+        photoList: state.photoList.photoList != null
     }
 
 }
