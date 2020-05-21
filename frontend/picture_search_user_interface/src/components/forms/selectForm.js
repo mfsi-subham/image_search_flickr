@@ -1,26 +1,39 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {Form, Col} from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
 
 
-const selectForm = props => {
+const SelectForm = props => {
+    
+    let firstOption = (props.options != null) ? props.options[0]['placeName']:''
+
+    const [option, setOption] = useState(firstOption)
 
     let optionItem = props.options.map((i, opt)=>{
-        return <option key={i.placeName}>{i.placeName}</option>
+        return <option value={i.placeName} key={i.placeName}>{i.placeName}</option>     
     })
 
+    useEffect(()=>{
+        props.fetchLatLongData(option)
+    })
+    
     const getFlickrData = (event) => {
+
         event.preventDefault()
-        props.fetchData()
+        props.fetchFlickrData(props.lat, props.long)     
+    }
+
+    const handleChange = (event) => {
+        setOption(event.target.value)
     }
     
     return (
         <Form>
             <Form.Row>
                 <Col sm={2}>
-                    <Form.Control size="sm" as="select" name="options">
+                    <Form.Control size="sm" as="select" name="options" onChange={handleChange}>
                         {optionItem}
                     </Form.Control>
                 </Col>
@@ -30,11 +43,19 @@ const selectForm = props => {
     );
 };
 
+const mapStateToProps = state =>{
+    return{
+        lat: state.placeList.lat,
+        long: state.placeList.long
+    }
+}
+
 const mapDispatchToProps = dispatch =>{
     return{
-        fetchData: () => dispatch(actions.fetchFlickrData())
+        fetchFlickrData: (lat, long) => dispatch(actions.fetchFlickrData(lat, long)),
+        fetchLatLongData: (option) => dispatch(actions.fetchLatLongData(option))
     };
 };
 
 
-export default connect(null, mapDispatchToProps)(selectForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectForm);
