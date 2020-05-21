@@ -20,7 +20,7 @@ const LatLongForm = props =>{
 
     const onSubmitHandler = (event) =>{
         event.preventDefault()
-        props.fetchFlickrData(lat, long)
+        props.fetchFlickrData(lat, long, 1)
 
     }
 
@@ -42,7 +42,7 @@ const LatLongForm = props =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        fetchFlickrData: (lat, long) => dispatch(actions.fetchFlickrData(lat, long)),
+        fetchFlickrData: (lat, long, page) => dispatch(actions.fetchFlickrData(lat, long, page)),
     }
 }
 
