@@ -12,14 +12,14 @@ class Query(ObjectType):
     """
     Query the db for Coordinates
     """
-    coordinate = graphene.Field(CoordianteType, id=graphene.Int())
+    coordinate = graphene.Field(CoordianteType, place_name=graphene.String())
     coordinates = graphene.List(CoordianteType)
 
     def resolve_coordinate(self, info, **kwargs):
-        id = kwargs.get('id')
+        place_name = kwargs.get('place_name')
 
-        if id is not None:
-            return Coordinate.objects.get(pk=id)
+        if place_name is not None:
+            return Coordinate.objects.get(place_name=place_name)
 
         return None
 
