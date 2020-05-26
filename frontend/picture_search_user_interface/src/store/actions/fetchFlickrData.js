@@ -24,6 +24,7 @@ export const fetchFlickrDataSuccess = (result, lat, long) => {
 };
 
 export const fetchFlickrDataFail = (error) => {
+
     return{
         type: actionTypes.FETCH_FLICKR_DATA_FAIL,
         error: error
@@ -35,12 +36,11 @@ export const fetchFlickrData = (lat, long, page) => {
     return dispatch => {
         dispatch(fetchFlickrDataStart())
 
-        let baseUrl = 'https://www.flickr.com/services/rest/'
+        let baseUrl = process.env.REACT_APP_FLICKR_URL
         let method = 'flickr.photos.search'
         let api_key = process.env.REACT_APP_FLICKR_API_KEY
-        
-        let accuracy = '11'
-        let perPage = '3'
+        let accuracy = process.env.REACT_APP_FLICKR_ACCURACY
+        let perPage = process.env.REACT_APP_FLICKR_PER_PAGE
         let format = 'json'
         let url = baseUrl+'?method='+method+'&api_key='+api_key+'&accuracy='+accuracy+'&lat='+lat+'&lon='+long+'&per_page='+perPage+'&page='+page+'&format='+format+'&nojsoncallback=1'
         
@@ -83,7 +83,7 @@ export const fetchLatLongData = (option) => {
     return dispatch => {
         dispatch(latLongFetchStart())
         axios({
-            url: 'http://localhost:8000/graphql/',
+            url: process.env.REACT_APP_API_URL,
             method: 'post',
             data: {
                 query: `{coordinate(placeName: "${option}"){latitude longitude}}`
@@ -91,12 +91,10 @@ export const fetchLatLongData = (option) => {
         })
         .then(result => {
             dispatch(latLongFetchSuccess(result.data.data.coordinate))
-            
         })
         .catch(error => {
-            console.log(error)
             dispatch(latLongFetchFail(error))
         })
-    }
-}
+    };
+};
 

@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
-
 export const placeFetchStart = () => {
     return{
         type: actionTypes.PLACE_FETCH_START
@@ -24,25 +23,24 @@ export const placeFetchFail = (error) => {
 };
 
 
-
 export const placeFetch = () => {
     return dispatch => {
         dispatch(placeFetchStart())
         axios({
-            url: 'http://localhost:8000/graphql/',
+            url: process.env.REACT_APP_API_URL,
             method: 'post',
             data: {
                 query: `{coordinates{placeName}}`
             }
         })
         .then(result => {
-            
-            dispatch(placeFetchSuccess(result.data.data.coordinates))
+            dispatch(placeFetchSuccess(result.data.data.coordinates))           
         })
         .catch(error => {
-            console.log(error)
             dispatch(placeFetchFail(error))
-        })
-    }
-}
+        });
+    };
+};
+
+
 

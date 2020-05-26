@@ -24,8 +24,6 @@ const placeFetchFail = (state, action) => {
     })
 }
 
-
-
 const reducer = (state=initialState, action) => {
     switch (action.type){
         case actionTypes.PLACE_FETCH_START: return placeFetchStart(state, action)

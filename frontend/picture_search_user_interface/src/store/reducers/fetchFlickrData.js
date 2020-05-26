@@ -22,7 +22,6 @@ const fetchFlickrDataSuccess = (state, action) => {
         lat: action.lat,
         long: action.long,
 
-
     })
 }
 
