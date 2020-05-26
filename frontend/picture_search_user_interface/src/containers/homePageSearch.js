@@ -10,16 +10,27 @@ const HomePageSearch = props => {
 
     useEffect(() => {
         props.onPlaceList()
-    }, [])
+    }, []);
 
-    let [form, setform] = useState("latLongForm")
+    let [form, setform] = useState('latLongForm')
 
     const  showLatLongForm = () => {
-        setform ("latLongForm")
-    }
+        setform ('latLongForm')
+    };
 
     const  showNameForm = () => { 
-        setform ("nameForm")
+        setform ('nameForm')
+    };
+    
+    let buttonLatLong = null
+    let buttonName = null
+    if (form === 'latLongForm'){
+        buttonLatLong = <Button variant="outline-info" size="sm" onClick={showLatLongForm} disabled>By Lat-Long</Button>
+        buttonName = <Button variant="outline-info" size="sm" onClick={showNameForm} >By Name</Button>
+    }
+    else{
+        buttonLatLong = <Button variant="outline-info" size="sm" onClick={showLatLongForm} >By Lat-Long</Button>
+        buttonName = <Button variant="outline-info" size="sm" onClick={showNameForm} disabled>By Name</Button>
     }
     
     return (
@@ -30,14 +41,11 @@ const HomePageSearch = props => {
         <br></br>
         <br></br>
         <br></br>
-        <Button variant="outline-info" size="sm" onClick={showLatLongForm} >By Lat-Long</Button>{" "}
-        <Button variant="outline-info" size="sm" onClick={showNameForm} >By Name</Button>{" "}
+        {buttonLatLong}{' '}
+        {buttonName}
         <br></br>
         <br></br>
-        {
-            form === "latLongForm" ? <LatLongForm></LatLongForm> : <SelectForm options={props.options}></SelectForm>
-        }
-        
+        {form === "latLongForm" ? <LatLongForm></LatLongForm> : <SelectForm options={props.options}></SelectForm>}
         <br></br>
         {props.photoList ? <SearchResult></SearchResult>: null}
         
@@ -49,11 +57,11 @@ const mapStateToProps = state => {
     return{
         options: state.placeList.placeList,
         photoList: state.photoList.photoList != null
-    }
-
-}
+    };
+};
 
 const mapDispatchToProps = dispatch => {
+    //dispatching action to get places 
     return{
         onPlaceList: () => dispatch(actions.placeFetch())
     };

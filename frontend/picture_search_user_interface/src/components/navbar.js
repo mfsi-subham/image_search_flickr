@@ -2,7 +2,8 @@ import React from 'react'
 import {Navbar, Nav} from 'react-bootstrap'
 import Logo from '../assets/images/logo.svg'
 
-const navbar = props => {
+const navbar = () => {
+    // render the Navbar
     return(
         <div>
             <Navbar collapseOnSelect expand="lg" bg="info" variant="dark" fixed="top">
@@ -24,7 +25,6 @@ const navbar = props => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-
         </div>
 
     );

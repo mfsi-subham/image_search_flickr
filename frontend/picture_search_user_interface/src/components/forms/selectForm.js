@@ -7,27 +7,34 @@ import * as actions from '../../store/actions/index'
 
 const SelectForm = props => {
     
-    let firstOption = (props.options != null) ? props.options[0]['placeName']:''
+    let firstOption = (props.options.length !== 0) ? props.options[0]['placeName']:null
 
     const [option, setOption] = useState(firstOption)
 
-    let optionItem = props.options.map((i, opt)=>{
+    let optionItem = props.options.map((i)=>{
         return <option value={i.placeName} key={i.placeName}>{i.placeName}</option>     
-    })
+    });
 
     useEffect(()=>{
+        //fetch data everytime component renders 
         props.fetchLatLongData(option)
-    })
+    });
     
     const getFlickrData = (event) => {
-
+        //get images on submit of form
         event.preventDefault()
         props.fetchFlickrData(props.lat, props.long, 1)
-    }
+    };
 
     const handleChange = (event) => {
+        //Change state every time option changes
         setOption(event.target.value)
-    }
+    };
+
+    let button = <Button variant="outline-info" size="sm" onClick={getFlickrData} disabled>Submit</Button>
+    if (firstOption){
+        button = <Button variant="outline-info" size="sm" onClick={getFlickrData} >Submit</Button>
+    };
     
     return (
         <Form>
@@ -37,20 +44,22 @@ const SelectForm = props => {
                         {optionItem}
                     </Form.Control>
                 </Col>
-                <Button variant="outline-info" size="sm" onClick={getFlickrData} >Submit</Button>{' '}
+                {button}
             </Form.Row>
         </Form>
     );
 };
 
 const mapStateToProps = state =>{
+    //getting latitude & longitude from store 
     return{
         lat: state.photoList.lat,
         long: state.photoList.long,
-    }
-}
+    };
+};
 
 const mapDispatchToProps = dispatch =>{
+    //dispatch functions for respective works
     return{
         fetchFlickrData: (lat, long, page) => dispatch(actions.fetchFlickrData(lat, long, page)),
         fetchLatLongData: (option) => dispatch(actions.fetchLatLongData(option))
