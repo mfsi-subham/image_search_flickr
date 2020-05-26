@@ -1,13 +1,17 @@
 import React from 'react'
+import GetFavouritePhotos from './searchFavourites'
 
-const favouritePhotos = props => {
+const FavouritePhotos = () => {
+    // It will render favourite marked photos from the database
+    
     return (
         <div>
-            <p> Under Construction</p>
-            <p> Under Construction</p>
-            <p> Under Construction</p>
+            <br></br>
+            <br></br>
+            <br></br>
+            <GetFavouritePhotos/>
         </div>
     );
-};
 
-export default favouritePhotos
+}
+export default FavouritePhotos
