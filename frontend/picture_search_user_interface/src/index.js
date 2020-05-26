@@ -10,7 +10,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import thunk from 'redux-thunk'
 import placeListReducer from './store/reducers/placeList'
 import fetchFlickrDataReducer from './store/reducers/fetchFlickrData'
+import {ApolloClient, InMemoryCache, HttpLink} from 'apollo-boost'
+import {ApolloProvider} from '@apollo/react-hooks'
 
+
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: process.env.REACT_APP_API_URL
+})
+const client = new ApolloClient({
+  cache,
+  link
+})
 
 const composeEnhancers = process.env.NODE_ENV ==='development'? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
 
@@ -27,11 +38,13 @@ const store = createStore(rootReducer, composeEnhancers(
 ))
 
 const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <App></App>
-    </BrowserRouter>
-  </Provider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App></App>
+      </BrowserRouter>
+    </Provider>
+  </ApolloProvider>
 )
 
 ReactDOM.render(

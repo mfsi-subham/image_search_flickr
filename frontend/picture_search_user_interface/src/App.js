@@ -19,7 +19,7 @@ const  App = props => {
 
   return (
 
-    <div>
+    <div>      
       <Navbar/>
       {routes}
     </div>
