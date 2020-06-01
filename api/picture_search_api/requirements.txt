@@ -2,3 +2,4 @@ Django==3.0.6
 graphene-django==2.10.0
 python-decouple==3.3
 django-cors-headers==3.2.1
+awsebcli==3.18.1
