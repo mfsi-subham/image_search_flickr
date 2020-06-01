@@ -18,7 +18,6 @@ const  App = props => {
   );
 
   return (
-
     <div>      
       <Navbar/>
       {routes}
