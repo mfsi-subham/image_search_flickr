@@ -6,10 +6,10 @@ const FavouritePhotos = () => {
     
     return (
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <GetFavouritePhotos/>
+            <div className='p-4 bg-secondary'></div>
+            <div className='p-5 row justify-content-md-center align-content-center bg-dark text-white'>
+                <GetFavouritePhotos/>
+            </div>
         </div>
     );
 

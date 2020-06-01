@@ -28,22 +28,25 @@ const LatLongForm = props =>{
 
     };
     
-    let button = <Button variant="outline-info" size="sm" onClick={onSubmitHandler} disabled>Submit</Button>
+    let button = <Button variant='info' size='lg' onClick={onSubmitHandler} disabled>Submit</Button>
     if (lat !==null && long != null){
-        button = <Button variant="outline-info" size="sm" onClick={onSubmitHandler} >Submit</Button>    
+        button = <Button variant='info' size='lg'  onClick={onSubmitHandler} >Submit</Button>    
     }
 
     return (
 
-        <Form>
-            <Form.Row>
-                <Col sm={2}>
-                    <Form.Control size="sm" type="number" step='0.0001' name="latitude" placeholder="Latitude"  onChange={handleLatitudeChange}/>
+        <Form >
+            <Form.Row >
+                <Col sm={5} className='py-1'>
+                    <Form.Control size='lg' type='number' step='0.0001' name='latitude' placeholder='Latitude'  onChange={handleLatitudeChange}/>
                 </Col>
-                <Col sm={2}>
-                    <Form.Control size="sm" type="number" step='0.0001' name="longitude" placeholder="Longitude"  onChange={handleLongitudeChange}/>
+                <Col sm={5} className='py-1'>
+                    <Form.Control size='lg' type='number' step='0.0001' name='longitude' placeholder='Longitude'  onChange={handleLongitudeChange}/>
                 </Col>
-                {button}
+                <div className='px-2 py-1'>
+                    {button}
+                </div>
+                
             </Form.Row>
         </Form>
     );

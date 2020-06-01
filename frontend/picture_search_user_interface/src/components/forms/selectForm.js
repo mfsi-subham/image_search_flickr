@@ -8,6 +8,7 @@ import * as actions from '../../store/actions/index'
 const SelectForm = props => {
     
     let firstOption = (props.options.length !== 0) ? props.options[0]['placeName']:null
+    let placeListError = props.error
 
     const [option, setOption] = useState(firstOption)
 
@@ -31,22 +32,35 @@ const SelectForm = props => {
         setOption(event.target.value)
     };
 
-    let button = <Button variant="outline-info" size="sm" onClick={getFlickrData} disabled>Submit</Button>
+    let button = <Button variant="info" size="lg" onClick={getFlickrData} disabled>Submit</Button>
     if (firstOption){
-        button = <Button variant="outline-info" size="sm" onClick={getFlickrData} >Submit</Button>
+        button = <Button variant="info" size="lg" onClick={getFlickrData} >Submit</Button>
     };
-    
-    return (
+
+    let form = (
+        
         <Form>
             <Form.Row>
-                <Col sm={2}>
-                    <Form.Control size="sm" as="select" name="options" onChange={handleChange}>
+                <Col sm={7}>
+                    <Form.Control size="lg" as="select" name="options" onChange={handleChange}>
                         {optionItem}
                     </Form.Control>
                 </Col>
-                {button}
+                <div>
+                    {button}
+                </div>
+                
             </Form.Row>
         </Form>
+
+    )
+
+    if (placeListError){ 
+        form = <h5 className="text-danger text-center"><strong>Everything is not right currently for this option...please try after some time</strong></h5>
+    }
+
+    return (
+            {...form}
     );
 };
 

@@ -9,11 +9,14 @@ const getFavoritePhotos = () => (
     <Query query={FAV_PHOTOS}>
         {({ loading, error, data }) => {
             if(loading) return 'Loading....'
-            if (error) return 'Unable to fetch images right now....please try after sometime'
+            if (error) return <h5 className="text-danger text-center"><strong>Unable to display images right now....please try after sometime</strong></h5>
+            
             return data.favouritePhotos.map(fav => (
-                <a key={fav.photoUrl}target='_blank'  href={fav.photoUrl}>
-                    <img key={fav.photoUrl} src={fav.photoUrl} alt="not found" style={{ height: 150, width: 150 }}></img>{' '}
-                </a>
+                    <div className='card bg-light' style={{ width: 200 }}>
+                        <a key={fav.photoUrl} target='_blank' rel='noopener noreferrer' href={fav.photoUrl}>
+                            <img className='m-2' key={fav.photoUrl} src={fav.photoUrl} alt="not found" style={{ height: 200, width: 180 }}></img>
+                        </a>
+                    </div>
             ))      
         }}
     </Query>
