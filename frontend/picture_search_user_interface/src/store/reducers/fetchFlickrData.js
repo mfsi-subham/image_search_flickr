@@ -6,12 +6,13 @@ const initialState = {
     error: null,
     page: 1,
     lat: null,
-    long: null
+    long: null,
+    loading: false
 
 };
 
 const fetchFlickrDataStart = (state, action) => {
-    return updateObject(state, {error: null})
+    return updateObject(state, {error: null, loading: true})
 };
 
 const fetchFlickrDataSuccess = (state, action) => {
@@ -21,13 +22,15 @@ const fetchFlickrDataSuccess = (state, action) => {
         page: action.page,
         lat: action.lat,
         long: action.long,
+        loading: false
 
     })
 }
 
 const fetchFlickrDataFail = (state, action) => {
     return updateObject(state, {
-        error: action.error
+        error: action.error,
+        loading: false
     })
 }
 //-----fetch lat long 
