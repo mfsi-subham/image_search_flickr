@@ -41,7 +41,7 @@ const HomePageSearch = props => {
             <Heading />
             
             <Offline>
-                <div className="shadow p-4 bg-secondary text-white">
+                <div className="shadow p-4 bg-dark text-white">
                     <h5 className="text-center text-danger" ><strong>You are Offline...Please check your internet conection</strong></h5>
                 </div>
             </Offline>
@@ -55,7 +55,7 @@ const HomePageSearch = props => {
                     {form === "latLongForm" ? <LatLongForm></LatLongForm> : <SelectForm options={props.options} error={props.placeListError}></SelectForm> }
                 </div>
 
-                <div className="shadow p-2 bg-dark d-flex justify-content-sm-center">
+                <div className="shadow p-4 bg-dark d-flex justify-content-sm-center">
                     {props.photoList ? <SearchResult></SearchResult>: null}
                 </div>
             </Online>
