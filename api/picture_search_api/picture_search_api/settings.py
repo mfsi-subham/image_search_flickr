@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.favourite_photos',
     'graphene_django',
     'corsheaders',
+    'sslserver',
 ]
 
 GRAPHENE = {
