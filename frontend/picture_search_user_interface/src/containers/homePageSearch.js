@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import LatLongForm from '../components/forms/latLongForm'
-import SelectForm from '../components/forms/selectForm'
+import LatLongForm from './forms/latLongForm'
+import SelectForm from './forms/selectForm'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index'
 import {connect} from 'react-redux'
@@ -11,10 +11,11 @@ import {Offline, Online} from 'react-detect-offline'
 const HomePageSearch = props => {
 
     useEffect(() => {
+        //fetch the pre defined places from database on each render
         props.onPlaceList()
     }, []);
 
-    let [form, setform] = useState('latLongForm')
+    let [form, setform] = useState('latLongForm') // By default display lat-long-form
 
     const  showLatLongForm = () => {
         setform ('latLongForm')
@@ -27,18 +28,21 @@ const HomePageSearch = props => {
     let buttonLatLong = null
     let buttonName = null
     if (form === 'latLongForm'){
+        //when displaying lat-long-form , disable that button
         buttonLatLong = <Button variant="info" size="lg" onClick={showLatLongForm} disabled>By Lat-Long</Button>
         buttonName = <Button variant="info" size="lg" onClick={showNameForm} >By Name</Button>
     }
     else{
+        //when displaying name-form , disable that button
         buttonLatLong = <Button variant="info" size="lg" onClick={showLatLongForm} >By Lat-Long</Button>
         buttonName = <Button variant="info" size="lg" onClick={showNameForm} disabled>By Name</Button>
     }    
+
     return (
         
         <div>
             
-            <Heading />
+            <Heading /> 
             
             <Offline>
                 <div className="shadow p-4 bg-dark text-white">
@@ -65,6 +69,7 @@ const HomePageSearch = props => {
 };
 
 const mapStateToProps = state => {
+    //fetching states from store
     return{
         options: state.placeList.placeList,
         placeListError: state.placeList.error,

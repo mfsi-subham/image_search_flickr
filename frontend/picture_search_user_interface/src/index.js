@@ -13,7 +13,7 @@ import fetchFlickrDataReducer from './store/reducers/fetchFlickrData'
 import {ApolloClient, InMemoryCache, HttpLink} from 'apollo-boost'
 import {ApolloProvider} from '@apollo/react-hooks'
 
-
+// Creating cahce and link for ApolloClient
 const cache = new InMemoryCache();
 const link = new HttpLink({
   uri: process.env.REACT_APP_API_URL

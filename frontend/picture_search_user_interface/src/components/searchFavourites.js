@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 const FAV_PHOTOS = gql `{favouritePhotos{photoUrl}}` //gql query for favourite photos
 
 const getFavoritePhotos = () => (
-    //Query to get favourite photos
+    //Query to get favourite photos from db 
     <Query query={FAV_PHOTOS}>
         {({ loading, error, data }) => {
             if(loading) return 'Loading....'

@@ -8,7 +8,7 @@ import HomePageSearch from '../src/containers/homePageSearch'
 const  App = props => {
 
   let routes = (
-    
+    //Creating routes
     <Switch>
       <Route path="/favourites" component={Favourites}/>
       <Route path="/" component={HomePageSearch}/>

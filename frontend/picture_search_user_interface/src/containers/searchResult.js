@@ -5,6 +5,7 @@ import * as actions from '../store/actions/index'
 import {useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+//gql queries to add or remove favourite photos
 const ADD_FAV_URL = gql`mutation($photoUrl: String!){createFavouritePhoto(input: {photoUrl: $photoUrl}){favouritePhoto{photoUrl: photoUrl}}}`
 const DELETE_FAV_URL = gql`mutation($photoUrl: String!){deleteFavouritePhoto(input: {photoUrl: $photoUrl}){favouritePhoto{photoUrl}}}`
 
@@ -20,20 +21,26 @@ const SearchResult = (props) => {
         const checkboxValue = document.getElementById(photoUrl).checked
     
         if (checkboxValue === true){
-            addFavouritePhoto({variables: {photoUrl}}).then(res => {
+            //if checkbox value is checked then photo will be added
+            addFavouritePhoto({variables: {photoUrl}})
+            .then(() => {
                 setSuccessMessage('Added to favourite list successfully')
                 setErrorMessage(null)
-            }).catch(err => {
+            })
+            .catch(err => {
                 setSuccessMessage(null)
                 setErrorMessage('Something went wrong...Please try after sometime( '+err.message+' )')
+
                 if(err.message.includes('UNIQUE constraint')){
                     setSuccessMessage('Already added to favourite list')
                     setErrorMessage(null)
                 }
+
             });
         }
         
         else{
+            //If checkbox value unchecked then delete from favourite list
             deleteFavouritePhoto({variables: {photoUrl}})
             .then(() => {
                 setErrorMessage(null)
@@ -47,9 +54,10 @@ const SearchResult = (props) => {
         };
     };
     
-    let photoList = <Spinner animation="border" variant="info" />
+    let photoList = <Spinner animation="border" variant="info" /> // Till data is fetched , spinner will be displayed
     
     if (!props.loading){
+        // when loading is completed display the fetched images
         photoList = props.photoList.map((i)=>{
             let photoUrl = `https://farm${i.farm}.staticflickr.com/${i.server}/${i.id}_${i.secret}.jpg`
             return(
@@ -104,6 +112,7 @@ const SearchResult = (props) => {
 };
 
 const mapStateToProps = state =>{
+    //fetching stated from the store
     return{
         photoList: state.photoList.photoList,
         loading: state.photoList.loading,
