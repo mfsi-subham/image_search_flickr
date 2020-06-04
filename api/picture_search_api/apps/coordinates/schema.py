@@ -28,6 +28,9 @@ class Query(ObjectType):
 
 
 class CoordinateInput(graphene.InputObjectType):
+    """
+    Setting inputs of the model Coordinate
+    """
     id = graphene.ID()
     longitude = graphene.Float(required=True)
     latitude = graphene.Float(required=True)

@@ -3,4 +3,3 @@ graphene-django==2.10.0
 python-decouple==3.3
 django-cors-headers==3.2.1
 django-sslserver==0.22
-
