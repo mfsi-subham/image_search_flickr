@@ -9,7 +9,8 @@ Search images by latitude &amp; longitude of a place or by the name of a place
 4. Run `cd ../` and then Build the docker `sudo docker-compose build` 
 5. Bring the docker up by `nohup sudo docker-compose up &`
 <br/>
-### Bringing Frontend React APP up
+
+## Bringing Frontend React APP up
 1. Run `cd ../../frontend/picture_search_user_interface/`
 2. Create .env file and edit first 2 options <br />
        - For option 1 add flickr api secret key. Get your api key and secret from [Flickr Api](https://www.flickr.com/services/api/keys/) <br />
